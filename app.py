@@ -51,10 +51,10 @@ class Posts(db.Model):
 #         return f'<Likes {self.id}>'
 
 
-
 @login_manager.user_loader
 def load_user(user_id):
-    return Log.query.get(int(user_id))
+    return db.session.get(Log, int(user_id))
+
 
 #
 # @app.route('/like', methods=['POST'])
@@ -83,8 +83,8 @@ def home():
 
 @app.route('/post/<int:id>')#chek post
 def post(id):
-    post = Posts.query.get(id)
-    return render_template('posts.html',post=post)
+    posts = Posts.query.get(id)
+    return render_template('posts.html',post=posts)
 
 
 
