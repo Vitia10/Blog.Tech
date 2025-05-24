@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block title%}
+Sign Up
+{%endblock%}
+{%block text%}
+{%for cat,msg in get_flashed_messages(True)%}
+<div id="flash-messages" class="flash {{cat}}">{{msg}}</div>
+{%endfor%}
+<div class="container-heading">
+    <form action="{{ url_for('register') }}" method="post" class="form-contact-log">
+        <p><label>Nickname: </label><input type="text" name="nick"><br />
+        <p><label>Email: </label><input type="text" name="email"><br />
+        <p><label>Password: </label><input type="password" name="psw"><br />
+        <button type="submit" class="save">Save</button>
+    </form>
+</div>
+
+{%endblock%}

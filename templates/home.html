@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{%block title%}
+Blog.Tech
+{%endblock%}
+{%block text%}
+{%for cat,msg in get_flashed_messages(True)%}
+<div id="flash-messages" class="flash {{cat}}">{{msg}}</div>
+{%endfor%}
+<div class="posts-container">
+  {% for element in posts %}
+    <div class="post-card">
+        <h2 class="post-title">{{ element.title }}</h2>
+        <p class="post-content">{{ element.content }}</p>
+        <p class="post-date">Date: {{ element.date.strftime('%d %B %Y, %H:%M') }}</p>
+        <p class="post-date">Author:
+            <img class="icon" src="{{ url_for('static', filename='img.jpg') }}" width="30" height="30" >    {{ element.author.nick }}</p>
+
+
+        <div class="post-actions">
+            {% if current_user.id == element.author.id %}
+            <a href="/post/{{ element.id }}/del" class="btn delete">Delete</a>
+            <a href="/post/{{ element.id }}" class="btn check">Check</a>
+            {% else %}
+            <a href="/post/{{ element.id }}" class="btn check">Check</a>
+            {% endif %}
+        </div>
+    </div>
+  {% endfor %}
+</div>
+
+{%endblock%}

@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%block title%}
+personal
+{%endblock%}
+{%block text%}
+<div class="profile-container">
+    <div class="profile-sidebar">
+        <div class="avatar">
+            <form class="form-contact">
+
+                <img style="height:auto;" alt="" src="{{ url_for('static', filename='img.jpg') }}" width="290" height="260" class="avatar avatar-user width-full border color-bg-default"/>
+            </form>
+        </div>
+        <div class="nick">
+            <h1 class="vcard-names">
+                <span>{{ current_user.nick }}</span>
+            </h1>
+
+        </div>
+        <div class="edit">
+            <li class="button-nav"><a href="#" class="nav-link px-2 text-body-secondary">Edit profile</a></li>
+        </div>
+
+    </div>
+    <div class="profile-content">
+        <div class="container" name="heading">
+
+            <div class="posts-container">
+
+                {% for element in posts %}
+                {% if current_user.id == element.author.id %}
+                <div class="post-card">
+                    <h2 class="post-title">{{ element.title }}</h2>
+                    <p class="post-content">{{ element.content }}</p>
+                    <p class="post-date">Date: {{ element.date.strftime('%d %B %Y, %H:%M') }}</p>
+                    <p class="post-date">Author:<img class="icon" src="{{ url_for('static', filename='img.jpg') }}" width="30" height="30" >
+                            {{ element.author.nick }}</p>
+
+
+
+                    <div class="post-actions">
+                        <a href="/post/{{ element.id }}/del" class="btn delete">Delete</a>
+                        <a href="/post/{{ element.id }}" class="btn check">Check</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+{%endblock%}

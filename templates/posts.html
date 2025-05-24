@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+{% block text %}
+
+<div class="container-post">
+    <h1>
+        {{ post.title }}
+    </h1>
+    <p>
+        {{ post.content }}
+    </p>
+    <p class="post-date">Date: {{ post.date.strftime('%d %B %Y, %H:%M') }}</p>
+    <p class="post-date">Author:
+        <img class="icon" src="{{ url_for('static', filename='img.jpg') }}" width="30" height="30" >    {{ post.author.nick }}</p>
+</div>
+<!--<form action="{{ url_for('like_post', post_id=post.id) }}" method="post">-->
+<!--    <button type="submit">❤️ Like</button>-->
+<!--</form>-->
+
+{% endblock %}
